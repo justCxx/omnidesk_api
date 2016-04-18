@@ -15,3 +15,6 @@ group :test do
   gem 'simplecov', require: false
   gem 'codeclimate-test-reporter', require: false
 end
+
+gem 'dotenv', groups: [:development, :test]
+gem 'awesome_print', require: 'ap', groups: [:development, :test]
