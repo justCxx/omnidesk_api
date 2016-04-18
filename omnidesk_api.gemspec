@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Ruby toolkit for working with the Omnidesk API'
   spec.description   = 'Simple wrapper for the Omnidesk API (https://omnidesk.ru/api/introduction/intro)'
-  spec.homepage      = 'https://github.com/justcxx/omnidesk_api'
+  spec.homepage      = 'https://github.com/insales/omnidesk_api'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files lib LICENSE.txt README.md`.split
