@@ -1,5 +1,4 @@
 # rubocop:disable Metrics/CyclomaticComplexity
-require 'sawyer'
 
 module OmnideskApi
   class Error < StandardError
@@ -40,9 +39,9 @@ module OmnideskApi
       @data ||=
         if (body = @response[:body]) && !body.empty?
           if body.is_a?(String) && @response[:response_headers] && @response[:response_headers][:content_type] =~ /json/
-            Sawyer::Agent.serializer.decode(body)
+            JSON.decode(body)
           else
-            body
+            { message: body }
           end
         end
     end
