@@ -1,4 +1,5 @@
 require 'omnidesk_api/response/raise_error'
+require 'faraday_middleware'
 
 module OmnideskApi
   module Default
@@ -11,6 +12,9 @@ module OmnideskApi
     # Default Faraday middleware stack
     MIDDLEWARE = Faraday::RackBuilder.new do |builder|
       builder.use OmnideskApi::Response::RaiseError
+      builder.request :multipart
+      builder.request :url_encoded
+      builder.response :json, :content_type => /\bjson$/
       builder.adapter Faraday.default_adapter
     end
 
