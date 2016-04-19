@@ -26,7 +26,8 @@ module OmnideskApi
     def initialize(options = {})
       # Use options passed in, but fall back to module defaults
       OmnideskApi::Configurable.keys.each do |key|
-        instance_variable_set(:"@#{key}", options[key] || OmnideskApi.instance_variable_get(:"@#{key}"))
+        value = options[key] || OmnideskApi.instance_variable_get(:"@#{key}")
+        instance_variable_set(:"@#{key}", value)
       end
     end
 
