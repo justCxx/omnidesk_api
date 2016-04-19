@@ -1,14 +1,21 @@
 #!/usr/bin/env ruby
 
 require 'bundler/setup'
+require 'ap'
+require 'pry'
+
+require 'dotenv'
+Dotenv.load
+
 require 'omnidesk_api'
 
-# You can add fixtures and/or initialization code here to make experimenting
-# with your gem easier. You can also use a different console, if you like.
-
-# (If you use this, don't forget to add pry to your Gemfile!)
-# require "pry"
-# Pry.start
+if ENV['OMNIDESK_API_LOG']
+  require 'logger'
+  OmnideskApi.configure do |config|
+    logger = Logger.new(ENV['OMNIDESK_API_LOG'])
+    config.middleware.response :logger, logger, bodies: true
+  end
+end
 
 require 'irb'
 IRB.start
