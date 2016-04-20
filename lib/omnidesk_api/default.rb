@@ -14,7 +14,7 @@ module OmnideskApi
       builder.use OmnideskApi::Response::RaiseError
       builder.request :multipart
       builder.request :url_encoded
-      builder.response :json, :content_type => /\bjson$/
+      builder.response :json, content_type: /\bjson$/
       builder.adapter Faraday.default_adapter
     end
 
