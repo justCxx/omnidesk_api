@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/justCxx/omnidesk_api.svg?branch=master)](https://travis-ci.org/justCxx/omnidesk_api)
+[![Code Climate](https://codeclimate.com/github/justCxx/omnidesk_api/badges/gpa.svg)](https://codeclimate.com/github/justCxx/omnidesk_api)
+[![Test Coverage](https://codeclimate.com/github/justCxx/omnidesk_api/badges/coverage.svg)](https://codeclimate.com/github/justCxx/omnidesk_api/coverage)
+
 # OmnideskApi
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/omnidesk_api`. To experiment with that code, run `bin/console` for an interactive prompt.
