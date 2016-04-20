@@ -65,6 +65,9 @@ module OmnideskApi
       conn_opts[:proxy] = @proxy if @proxy
       Faraday.new(conn_opts) do |conn|
         conn.basic_auth(@login, @password) if basic_authenticated?
+        conn.request :multipart
+        conn.request :url_encoded
+        conn.response :json, content_type: /\bjson$/
         conn.url_prefix = api_endpoint
       end
     end
