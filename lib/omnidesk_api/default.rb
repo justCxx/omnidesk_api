@@ -12,7 +12,6 @@ module OmnideskApi
     # Default Faraday middleware stack
     MIDDLEWARE = Faraday::RackBuilder.new do |builder|
       builder.use OmnideskApi::Response::RaiseError
-      builder.adapter Faraday.default_adapter
     end
 
     # Default page size
