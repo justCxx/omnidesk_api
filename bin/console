@@ -11,9 +11,12 @@ require 'omnidesk_api'
 
 if ENV['OMNIDESK_API_LOG']
   require 'logger'
+  logger = Logger.new(ENV['OMNIDESK_API_LOG'])
   OmnideskApi.configure do |config|
-    logger = Logger.new(ENV['OMNIDESK_API_LOG'])
-    config.middleware.response :logger, logger, bodies: true
+    config.middleware = Faraday::RackBuilder.new do |builder|
+      builder.response :logger, logger, bodies: true
+      builder.use OmnideskApi::Response::RaiseError
+    end
   end
 end
 
