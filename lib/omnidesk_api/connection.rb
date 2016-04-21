@@ -6,8 +6,12 @@ module OmnideskApi
   module Connection
     include OmnideskApi::Authentication
 
+    # Header keys that can be passed in options hash to {#get},{#head}
+    CONVENIENCE_HEADERS = Set.new([:accept, :content_type])
+    NO_BODY = Set.new([:get, :head])
+
     def get(url, options = {})
-      request :get, url, options
+      request :get, url, parse_query_and_convenience_headers(options)
     end
 
     def post(url, data = nil, options = {})
@@ -27,7 +31,7 @@ module OmnideskApi
     end
 
     def head(url, options = {})
-      request :head, url, options
+      request :head, url, parse_query_and_convenience_headers(options)
     end
 
     def conn
@@ -48,32 +52,46 @@ module OmnideskApi
 
       @last_response = conn.send method, url do |req|
         req.body = data if data
-        if (params = options[:query])
-          req.params.update params
-        end
-        if (headers = options[:headers])
-          req.headers.update headers
-        end
+        req.params.update options[:query] if options[:query]
+        req.headers.update options[:headers] if options[:headers]
       end
 
       @last_response.body
     end
 
     def connection
-      conn_opts = @connection_options.dup
-      conn_opts[:builder] = @middleware if @middleware
-      conn_opts[:proxy] = @proxy if @proxy
-      Faraday.new(conn_opts) do |conn|
+      Faraday.new(faraday_options) do |conn|
         conn.basic_auth(@login, @password) if basic_authenticated?
         conn.request :multipart
         conn.request :url_encoded
         conn.response :json, content_type: /\bjson$/
         conn.url_prefix = api_endpoint
+        conn.adapter Faraday.default_adapter
+      end
+    end
+
+    def faraday_options
+      connection_options.dup.tap do |opts|
+        opts[:builder] = @middleware if @middleware
+        opts[:proxy] = @proxy if @proxy
       end
     end
 
     def no_body?(method)
-      [:get, :head].include?(method)
+      NO_BODY.include?(method)
+    end
+
+    def parse_query_and_convenience_headers(options)
+      headers = options.delete(:headers) { Hash.new }
+      CONVENIENCE_HEADERS.each do |h|
+        headers[h] = options.delete(h) if options[h]
+      end
+      query = options.delete(:query)
+      opts = { query: options }
+      opts[:query].merge!(query) if query && query.is_a?(Hash)
+      opts[:headers] = headers unless headers.empty?
+
+      opts
     end
   end
 end
