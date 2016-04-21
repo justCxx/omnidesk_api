@@ -4,7 +4,7 @@ require 'faraday_middleware'
 module OmnideskApi
   module Default
     # Default User Agent header string
-    USER_AGENT = 'OmnideskApi Ruby Gem'.freeze
+    USER_AGENT = "OmnideskApi Ruby Gem #{OmnideskApi::VERSION}".freeze
 
     # Default media type
     MEDIA_TYPE = 'application/json'.freeze
