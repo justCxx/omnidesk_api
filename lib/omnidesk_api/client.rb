@@ -8,6 +8,9 @@ require 'omnidesk_api/client/labels'
 require 'omnidesk_api/client/staff'
 require 'omnidesk_api/client/stats'
 require 'omnidesk_api/client/custom_fields'
+require 'omnidesk_api/client/knowledge_base/article'
+require 'omnidesk_api/client/knowledge_base/category'
+require 'omnidesk_api/client/knowledge_base/section'
 
 module OmnideskApi
   class Client
@@ -22,6 +25,9 @@ module OmnideskApi
     include OmnideskApi::Client::Staff
     include OmnideskApi::Client::Stats
     include OmnideskApi::Client::CustomFields
+    include OmnideskApi::Client::KnowledgeBase::Article
+    include OmnideskApi::Client::KnowledgeBase::Category
+    include OmnideskApi::Client::KnowledgeBase::Section
 
     def initialize(options = {})
       # Use options passed in, but fall back to module defaults

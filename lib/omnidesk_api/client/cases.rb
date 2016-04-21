@@ -41,14 +41,8 @@ module OmnideskApi
         post "cases/#{case_id}/messages.json", options
       end
 
-      def cases_count(options = {})
-        options[:limit] = 1
-        cases(options)['total_count']
-      end
-
-      def messages_count(case_id, options = {})
-        options[:limit] = 1
-        messages(case_id, options)['total_count']
+      def create_note(case_id, options = {})
+        post "cases/#{case_id}/notes.json", options
       end
     end
   end
