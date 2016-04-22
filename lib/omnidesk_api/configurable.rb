@@ -1,6 +1,6 @@
 module OmnideskApi
   module Configurable
-    attr_accessor :auto_paginate, :connection_options, :middleware,
+    attr_accessor :connection_options, :middleware,
                   :per_page, :proxy, :user_agent
     attr_writer :login, :password, :api_endpoint
 
@@ -8,7 +8,6 @@ module OmnideskApi
       def keys
         @keys ||= [
           :api_endpoint,
-          :auto_paginate,
           :connection_options,
           :middleware,
           :login,

@@ -42,12 +42,6 @@ module OmnideskApi
         ENV['OMNIDESK_API_PASSWORD']
       end
 
-      # Default pagination preference from ENV
-      # @return [String]
-      def auto_paginate
-        ENV['OMNIDESK_API_AUTO_PAGINATE']
-      end
-
       # Default pagination page size from ENV
       # @return [Fixnum] Page size
       def per_page
