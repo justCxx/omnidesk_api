@@ -42,5 +42,15 @@ module OmnideskApi
         inspected.gsub! @password, '*******' if @password
       end
     end
+
+    def login=(value)
+      reset_connection!
+      @login = value
+    end
+
+    def password=(value)
+      reset_connection!
+      @password = value
+    end
   end
 end

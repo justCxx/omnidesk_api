@@ -9,7 +9,7 @@ describe OmnideskApi::Client do
     OmnideskApi.reset!
   end
 
-  context 'module configuration' do
+  describe 'module configuration' do
     before do
       OmnideskApi.reset!
       OmnideskApi.configure do |config|
@@ -62,6 +62,42 @@ describe OmnideskApi::Client do
         secret_data = inspected.scan(/@password=\".*?\"/).first
         expect(secret_data).not_to include('i10veruby')
         expect(inspected).not_to include('i10veruby')
+      end
+    end
+  end
+
+  describe 'authentication' do
+    context 'with module level config' do
+      it 'sets basic auth creds with .configure' do
+        OmnideskApi.configure do |config|
+          config.login = 'username'
+          config.password = 'il0veruby'
+        end
+        expect(OmnideskApi.client).to be_basic_authenticated
+      end
+
+      it 'sets basic auth creds with module methods' do
+        OmnideskApi.login = 'username'
+        OmnideskApi.password = 'il0veruby'
+        expect(OmnideskApi.client).to be_basic_authenticated
+      end
+    end
+
+    context 'with class level config' do
+      let(:client) { OmnideskApi.client }
+
+      it 'sets basic auth creds with .configure' do
+        client.configure do |config|
+          config.login = 'username'
+          config.password = 'il0veruby'
+        end
+        expect(client).to be_basic_authenticated
+      end
+
+      it 'sets basic auth creds with instance methods' do
+        client.login = 'username'
+        client.password = 'il0veruby'
+        expect(client).to be_basic_authenticated
       end
     end
   end
