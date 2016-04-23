@@ -34,12 +34,12 @@ module OmnideskApi
       request :head, url, parse_query_and_convenience_headers(options)
     end
 
-    def conn
-      @conn ||= connection
-    end
-
     def last_response
       @last_response if defined? @last_response
+    end
+
+    def reset_connection!
+      @connection = nil
     end
 
     private
@@ -50,7 +50,7 @@ module OmnideskApi
         data = nil
       end
 
-      @last_response = conn.send method, url do |req|
+      @last_response = connection.send method, url do |req|
         req.body = data if data
         req.params.update options[:query] if options[:query]
         req.headers.update options[:headers] if options[:headers]
@@ -60,18 +60,14 @@ module OmnideskApi
     end
 
     def connection
-      Faraday.new(faraday_options) do |conn|
+      @connection ||= Faraday.new(faraday_options) do |conn|
         conn.basic_auth(@login, @password) if basic_authenticated?
-        conn.request :multipart
-        conn.request :url_encoded
-        conn.response :json, content_type: /\bjson$/
         conn.url_prefix = api_endpoint
-        conn.adapter Faraday.default_adapter
       end
     end
 
     def faraday_options
-      connection_options.dup.tap do |opts|
+      connection_options.tap do |opts|
         opts[:builder] = @middleware if @middleware
         opts[:proxy] = @proxy if @proxy
       end
