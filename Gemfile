@@ -8,6 +8,7 @@ gem 'rake'
 group :development do
   gem 'pry-byebug'
   gem 'yard'
+  gem 'typhoeus'
 end
 
 group :test do

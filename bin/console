@@ -9,6 +9,14 @@ Dotenv.load
 
 require 'omnidesk_api'
 
+if ENV['OMNIDESK_API_ADAPTER'] == 'typhoeus'
+  require 'typhoeus'
+  require 'typhoeus/adapters/faraday'
+
+  OmnideskApi.middleware.delete(Faraday::Adapter::NetHttp)
+  OmnideskApi.middleware.adapter :typhoeus
+end
+
 if (log_path = ENV['OMNIDESK_API_LOG'])
   require 'logger'
   logger = Logger.new(log_path)
