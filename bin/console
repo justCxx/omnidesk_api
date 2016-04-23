@@ -9,15 +9,10 @@ Dotenv.load
 
 require 'omnidesk_api'
 
-if ENV['OMNIDESK_API_LOG']
+if (log_path = ENV['OMNIDESK_API_LOG'])
   require 'logger'
-  logger = Logger.new(ENV['OMNIDESK_API_LOG'])
-  OmnideskApi.configure do |config|
-    config.middleware = Faraday::RackBuilder.new do |builder|
-      builder.response :logger, logger, bodies: true
-      builder.use OmnideskApi::Response::RaiseError
-    end
-  end
+  logger = Logger.new(log_path)
+  OmnideskApi.middleware.response :logger, logger, bodies: true
 end
 
 require 'irb'
