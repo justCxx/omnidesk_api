@@ -1,4 +1,5 @@
 require 'omnidesk_api/response/raise_error'
+require 'omnidesk_api/version'
 require 'faraday_middleware'
 
 module OmnideskApi
