@@ -1,3 +1,4 @@
+require 'omnidesk_api/request/file_upload'
 require 'omnidesk_api/response/raise_error'
 require 'omnidesk_api/version'
 require 'faraday_middleware'
@@ -12,6 +13,7 @@ module OmnideskApi
 
     # Default Faraday middleware stack
     MIDDLEWARE = Faraday::RackBuilder.new do |builder|
+      builder.use OmnideskApi::Request::FileUpload
       builder.request :multipart
       builder.request :url_encoded
       builder.response :json, content_type: /\bjson$/
