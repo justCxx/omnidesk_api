@@ -41,7 +41,7 @@ module OmnideskApi
     end
 
     def api_endpoint
-      File.join(@api_endpoint, '')
+      File.join(@api_endpoint, '') if @api_endpoint
     end
 
     private
