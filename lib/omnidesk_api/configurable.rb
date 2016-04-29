@@ -47,7 +47,9 @@ module OmnideskApi
     private
 
     def options
-      Hash[OmnideskApi::Configurable.keys.map { |key| [key, instance_variable_get(:"@#{key}")] }]
+      OmnideskApi::Configurable.keys.each_with_object({}) do |key, opts|
+        opts[key] = instance_variable_get(:"@#{key}")
+      end
     end
   end
 end
