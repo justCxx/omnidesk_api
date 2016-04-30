@@ -22,8 +22,8 @@ module OmnideskApi
       request :put, url, data, options
     end
 
-    def path(url, data = nil, options = {})
-      request :path, url, data, options
+    def patch(url, data = nil, options = {})
+      request :patch, url, data, options
     end
 
     def delete(url, data = nil, options = {})

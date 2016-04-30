@@ -15,6 +15,7 @@ group :test do
   gem 'rspec', '~> 3.0'
   gem 'simplecov', require: false
   gem 'codeclimate-test-reporter', require: false
+  gem 'webmock'
 end
 
 gem 'dotenv', groups: [:development, :test]
