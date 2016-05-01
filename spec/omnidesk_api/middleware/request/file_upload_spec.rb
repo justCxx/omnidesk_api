@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe OmnideskApi::Request::FileUpload do
+describe OmnideskApi::Middleware::Request::FileUpload do
   describe '.call' do
     let(:middleware) { described_class.new(-> (env) { env }) }
     let(:upload_file) { 'spec/files/gundamcat.png' }
