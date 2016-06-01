@@ -29,7 +29,7 @@ describe OmnideskApi do
     it 'returns a fresh client when options are not the same' do
       client = OmnideskApi.client
 
-      OmnideskApi.password = 'i10loveruby'
+      OmnideskApi.password = 'i10veruby'
 
       client_two = OmnideskApi.client
       client_three = OmnideskApi.client
