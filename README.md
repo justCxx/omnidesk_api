@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/justCxx/omnidesk_api.svg?branch=master)](https://travis-ci.org/justCxx/omnidesk_api)
+[![Build Status](https://travis-ci.org/v-kolesnikov/omnidesk_api.svg?branch=master)](https://travis-ci.org/justCxx/omnidesk_api)
 [![Code Climate](https://codeclimate.com/github/justCxx/omnidesk_api/badges/gpa.svg)](https://codeclimate.com/github/justCxx/omnidesk_api)
 [![Test Coverage](https://codeclimate.com/github/justCxx/omnidesk_api/badges/coverage.svg)](https://codeclimate.com/github/justCxx/omnidesk_api/coverage)
 
